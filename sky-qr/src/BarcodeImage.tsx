@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, CSSProperties } from 'react';
 import { BrowserQRCodeSvgWriter } from '@zxing/browser';
 
 interface BarcodeImageProps
@@ -22,8 +22,13 @@ export class BarcodeImage extends React.Component<BarcodeImageProps>
 
     render()
     {
+        let containerStyle : CSSProperties = 
+        {
+            background: "#EEEEEE"
+        }
+
         return (
-            <div ref={this.container}>
+            <div style={containerStyle} ref={this.container}>
 
             </div>
         )

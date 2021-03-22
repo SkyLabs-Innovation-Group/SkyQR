@@ -16,12 +16,10 @@ class App extends React.Component<AppProps, AppState>
 
     componentDidMount()
     {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        let dataString = urlParams.get("qr");
+        var urlParam = window.location.href.split('/').pop();
+        if(!urlParam) return;
 
-        if (dataString != null)
-            this.setState({ dataString: dataString })
+        this.setState({ dataString: urlParam });
     }
 
     render()
