@@ -24,7 +24,8 @@ export class BarcodeImage extends React.Component<BarcodeImageProps>
     {
         let containerStyle : CSSProperties = 
         {
-            background: "#EEEEEE"
+            background: "#EEEEEE",
+            marginBottom: "48px"
         }
 
         return (
@@ -36,11 +37,18 @@ export class BarcodeImage extends React.Component<BarcodeImageProps>
 
     generateBarcode()
     {
-        if (!this.container.current) return;
+        try
+        {
+            if (!this.container.current) return;
 
-        this.container.current.innerHTML = '';
-
-        let writer = new BrowserQRCodeSvgWriter();
-        writer.writeToDom(this.container.current, this.props.dataString, 200, 200);
+            this.container.current.innerHTML = '';
+    
+            let writer = new BrowserQRCodeSvgWriter();
+            writer.writeToDom(this.container.current, this.props.dataString, 200, 200);
+        }
+        catch (e)
+        {
+            console.log(e);
+        }
     }
 }
