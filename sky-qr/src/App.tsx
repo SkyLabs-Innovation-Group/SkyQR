@@ -16,7 +16,16 @@ class App extends React.Component<AppProps, AppState>
 
     componentDidMount()
     {
-        var urlParam = window.location.href.split('/').pop();
+        var urlParam = window.location.href.split('/?qr=').pop();
+        if(!urlParam) 
+            return;
+
+        if(urlParam.includes('/'))
+        {
+            //handle inputs with multiple slashes such as full skylink urls
+            urlParam = urlParam.split('/').pop();
+        }
+
         if(!urlParam) 
             return;
 
