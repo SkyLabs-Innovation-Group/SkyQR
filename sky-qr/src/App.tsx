@@ -12,12 +12,20 @@ interface AppState
 
 class App extends React.Component<AppProps, AppState>
 {
-    state = { dataString: "No Data" };
+    state = { dataString: "no data" };
 
     componentDidMount()
     {
         var urlParam = window.location.href.split('/').pop();
-        if(!urlParam) return;
+        if(!urlParam) 
+            return;
+
+        if(urlParam.length == 46)
+        {
+            //is a skylink
+            let portal = "https://siasky.net";
+            urlParam = `${portal}/${urlParam}`;
+        }
 
         this.setState({ dataString: urlParam });
     }
