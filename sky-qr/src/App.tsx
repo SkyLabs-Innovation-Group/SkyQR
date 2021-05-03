@@ -12,7 +12,7 @@ interface AppState
 
 class App extends React.Component<AppProps, AppState>
 {
-    state = { dataString: "no data" };
+    state = { dataString: "https://encodeqr.hns.siasky.net/" };
 
     inputText = createRef<HTMLInputElement>();
 
@@ -37,6 +37,8 @@ class App extends React.Component<AppProps, AppState>
 
     changeDataString(event : React.ChangeEvent<HTMLInputElement>)
     {
+        window.location.hash = event.target.value;
+
         this.setState({ dataString: event.target.value });
     }
 
@@ -51,7 +53,8 @@ class App extends React.Component<AppProps, AppState>
             fontSize: "24px",
             display: "inline-block",
             margin: "0 0 8px 0",
-            width: "50vw"
+            width: "50vw",
+            padding: "8px"
         };
 
         let labelStyle : CSSProperties = {
@@ -71,18 +74,33 @@ class App extends React.Component<AppProps, AppState>
             width: "33vw"
         };
 
+        let innerContainerStyle : CSSProperties = {
+            display: "block",
+            textAlign: "left",
+            width: "50vw"
+        };
+
+        let buttonStyle : CSSProperties = {
+            float: "right",
+            marginTop: "4px",
+            position: "relative",
+            right: "-8px"
+        };
+
         return (
             <div className="App">
                 <div style={containerStyle}>
                     <p style={inlineStyle}><a href="http://app.encodeqr.hns.to">SkyDrop</a></p>
                     <p style={inlineStyle}><a href="https://to.skydroid.app/skydrop.skyqr">Android</a></p>
-                    <p style={inlineStyle}><a href="">iOS</a></p>
+                    <p style={inlineStyle}><a href="https://siasky.net/AADuZUGK6EouCHoHLvMMb3d-czZbuMKTXprGii3EQayXyw">iOS</a></p>
                 </div>
                 <header className="App-header">
                     <BarcodeImage dataString={this.state.dataString}/>
-                    <label style={labelStyle}>Enter skylink to encode:</label>  
-                    <input style={inputStyle} type="text" ref={this.inputText} onChange={a => this.changeDataString(a)} value={this.state.dataString}/>
-                    <button onClick={() => this.copyLink()}>Copy Link</button>
+                    <div style={innerContainerStyle}>
+                        <label style={labelStyle}>Enter skylink to encode:</label>  
+                        <input style={inputStyle} type="text" ref={this.inputText} onChange={a => this.changeDataString(a)} value={this.state.dataString}/>
+                        <button style={buttonStyle} onClick={() => this.copyLink()}>Copy Link</button>
+                    </div>
                 </header>
             </div>
         );
