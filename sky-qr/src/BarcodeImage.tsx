@@ -44,7 +44,7 @@ export class BarcodeImage extends React.Component<BarcodeImageProps>
             this.container.current.innerHTML = '';
     
             let writer = new BrowserQRCodeSvgWriter();
-            writer.writeToDom(this.container.current, this.props.dataString, 200, 200);
+            writer.writeToDom(this.container.current, this.props.dataString, 300, 300);
         }
         catch (e)
         {

@@ -12,7 +12,7 @@ interface AppState
 
 class App extends React.Component<AppProps, AppState>
 {
-    state = { dataString: "https://encodeqr.hns.siasky.net/" };
+    state = { dataString: "http://app.skydrop.hns.to" };
 
     inputText = createRef<HTMLInputElement>();
 
@@ -44,6 +44,9 @@ class App extends React.Component<AppProps, AppState>
 
     copyLink()
     {
+        if (!navigator?.clipboard?.writeText)
+            return;
+
         navigator.clipboard.writeText(this.state.dataString);
     }
 
@@ -90,14 +93,14 @@ class App extends React.Component<AppProps, AppState>
         return (
             <div className="App">
                 <div style={containerStyle}>
-                    <p style={inlineStyle}><a href="http://app.encodeqr.hns.to">SkyDrop</a></p>
-                    <p style={inlineStyle}><a href="https://to.skydroid.app/skydrop.skyqr">Android</a></p>
-                    <p style={inlineStyle}><a href="https://siasky.net/AADuZUGK6EouCHoHLvMMb3d-czZbuMKTXprGii3EQayXyw">iOS</a></p>
+                    <p style={inlineStyle}><a href="http://app.skydrop.hns.to">SkyDrop</a></p>
+                    <p style={inlineStyle}><a href="https://play.google.com/store/apps/details?id=to.hns.skydrop">Google Play</a></p>
+                    <p style={inlineStyle}><a href="https://apps.apple.com/app/id1568591168#?platform=iphone">App Store</a></p>
                 </div>
                 <header className="App-header">
                     <BarcodeImage dataString={this.state.dataString}/>
                     <div style={innerContainerStyle}>
-                        <label style={labelStyle}>Enter skylink to encode:</label>  
+                        <label style={labelStyle}>Enter text to encode to QR:</label>  
                         <input style={inputStyle} type="text" ref={this.inputText} onChange={a => this.changeDataString(a)} value={this.state.dataString}/>
                         <button style={buttonStyle} onClick={() => this.copyLink()}>Copy Link</button>
                     </div>
